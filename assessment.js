@@ -13,14 +13,30 @@ assessmentButton.onclick = () => {
 
   //診断結果表示エリアの作成
   resultDivision.innerText = '';
-  const header = document.createElement('h3');
-  header.innerText = '診断結果'
-  resultDivision.appendChild(header);
+
+  // headerDivision の作成
+  const headerDivision = document.createElement('div');
+  headerDivision.setAttribute('class', 'card-header text-bg-primary');
+  headerDivision.innerText = '診断結果';
+
+  // bodyDivision の作成
+  const bodyDivision = document.createElement('div');
+  bodyDivision.setAttribute('class', 'card-body');
 
   const paragraph = document.createElement('p');
+  paragraph.setAttribute('class', 'card-text');
   const result = assessment(userName);
   paragraph.innerText = result;
-  resultDivision.appendChild(paragraph);
+  bodyDivision.appendChild(paragraph);
+
+  // resultDivision に Bootstrap のスタイルを適用する
+  resultDivision.setAttribute('class', 'card');
+
+  // headerDivision と bodyDivision を resultDivision に差し込む
+  resultDivision.appendChild(headerDivision);
+  resultDivision.appendChild(bodyDivision);
+
+
 
   // ツイートエリアの作成
   tweetDivision.innerText = '';
@@ -90,7 +106,7 @@ function assessment(userName) {
 // テストコード
 console.assert(
   assessment('太郎') ===
-   '太郎さんのラッキーたばやんは待ち合わせに早く来すぎたたばです。太郎さんは早く着きすぎないようにすると運気up。',
+  '太郎さんのラッキーたばやんは待ち合わせに早く来すぎたたばです。太郎さんは早く着きすぎないようにすると運気up。',
   '診断結果の文言の特定部分を名前に置き換える処理が正しくありません。'
 );
 console.assert(
